@@ -4,7 +4,7 @@ CloudRecon is a local security assessment platform for **authorized** AWS EC2 in
 
 It is built as a portfolio project. The demo runs entirely offline with synthetic instances. Live AWS calls are implemented and gated, and they were **not** executed against a real account in this workspace.
 
-No license file is included yet. Do not treat the source as licensed for redistribution until one is added.
+This project is licensed under the [MIT License](LICENSE).
 
 ## What it does
 
