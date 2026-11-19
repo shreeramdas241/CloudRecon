@@ -1,0 +1,61 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AccountIdentity",
+      "Effect": "Allow",
+      "Action": ["sts:GetCallerIdentity"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ReadOnlyInventory",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeRegions",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeNetworkInterfaces",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DescribeListeners"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SsmReadStatus",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:DescribeInstanceInformation",
+        "ssm:GetCommandInvocation",
+        "ssm:ListCommandInvocations"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SsmSendToAuthorizedInstances",
+      "Effect": "Allow",
+      "Action": ["ssm:SendCommand"],
+      "Resource": ["arn:aws:ec2:*:*:instance/*"],
+      "Condition": {
+        "StringEquals": {
+          "ssm:resourceTag/CloudRecon": "authorized"
+        }
+      }
+    },
+    {
+      "Sid": "SsmUseRunShellDocument",
+      "Effect": "Allow",
+      "Action": ["ssm:SendCommand"],
+      "Resource": ["arn:aws:ssm:*:*:document/AWS-RunShellScript"]
+    },
+    {
+      "Sid": "OptionalInspectorRead",
+      "Effect": "Allow",
+      "Action": ["inspector2:ListFindings"],
+      "Resource": "*"
+    }
+  ]
+}

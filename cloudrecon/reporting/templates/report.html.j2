@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CloudRecon security assessment</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; color: #1c2430; background: #f4f6f8; }
+    header { background: #102033; color: #fff; padding: 28px 40px; }
+    header h1 { margin: 0 0 6px; font-size: 28px; font-weight: 650; }
+    header p { margin: 0; color: #c5d0dc; }
+    main { padding: 24px 40px 48px; }
+    .banner { background: #fff6e8; border: 1px solid #e2b15a; padding: 12px 14px; margin-bottom: 16px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .card { background: #fff; border: 1px solid #d8dee6; padding: 14px; }
+    .card span { display: block; color: #5c6b7a; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .card strong { font-size: 26px; }
+    section { margin-top: 28px; }
+    h2 { font-size: 18px; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e4e8ee; vertical-align: top; font-size: 13px; }
+    th { background: #e8eef5; }
+    .confirmed { color: #8a2e2e; font-weight: 650; }
+    .potential { color: #8a5a12; font-weight: 650; }
+    .note { color: #5c6b7a; font-size: 13px; }
+    footer { padding: 8px 40px 32px; color: #5c6b7a; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CloudRecon assessment</h1>
+    <p>Authorized, non-destructive inventory and vulnerability correlation. Priority is a local ranking, not CVSS.</p>
+  </header>
+  <main>
+    {% if demo %}
+    <div class="banner">
+      Synthetic demonstration data. Instance IDs and account 111122223333 are fictional.
+      CVE-9999-* ranges are illustrative. CVE-2021-44228 uses the published Log4j 2.15.0 fix boundary
+      and is attached to a synthetic asset. Refresh NVD, OSV, vendor advisories, and the full CISA KEV
+      catalog before any operational use. This report does not claim verified internet reachability.
+    </div>
+    {% endif %}
+    <div class="cards">
+      <div class="card"><span>Instances</span><strong>{{ metrics.assets }}</strong></div>
+      <div class="card"><span>Fully scanned</span><strong>{{ metrics.scanned_assets }}</strong></div>
+      <div class="card"><span>Not fully scanned</span><strong>{{ metrics.unscanned_assets }}</strong></div>
+      <div class="card"><span>Open KEV</span><strong>{{ metrics.open_kev }}</strong></div>
+      <div class="card"><span>Potential exposure</span><strong>{{ metrics.potential_internet_exposed }}</strong></div>
+      <div class="card"><span>Unknown exposure</span><strong>{{ metrics.unknown_exposure }}</strong></div>
+    </div>
+    {% if scan %}
+    <p class="note">Scan {{ scan.id }} · {{ scan.mode }} · {{ scan.status }} · started {{ scan.started_at }}</p>
+    {% endif %}
+
+    <section>
+      <h2>Findings</h2>
+      <p class="note">Confirmed affected and potentially affected are different match outcomes. A potential match needs vendor or scanner confirmation before it is treated as a vulnerability on that build.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>CVE</th><th>Asset</th><th>Package</th><th>Installed</th><th>Fixed</th>
+            <th>Match</th><th>CVSS</th><th>KEV</th><th>Priority</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in findings %}
+          <tr>
+            <td>{{ item.cve_id }}{% if item.illustrative %} *{% endif %}</td>
+            <td>{{ item.asset_name or item.asset_id }}<br><span class="note">{{ item.region }}</span></td>
+            <td>{{ item.package_name }}</td>
+            <td>{{ item.installed_version }}</td>
+            <td>{{ item.fixed_version or "unknown" }}</td>
+            <td class="{{ 'confirmed' if item.match_status == 'confirmed_affected' else 'potential' }}">{{ item.match_status }}</td>
+            <td>{{ item.cvss if item.cvss is not none else "n/a" }} {{ item.severity or "" }}</td>
+            <td>{{ "yes" if item.kev else "no" }}</td>
+            <td>{{ item.priority_band }} ({{ item.priority_score }})</td>
+            <td>{{ item.remediation_status }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="10">No findings stored.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Why the priority was assigned</h2>
+      {% for item in findings if item.remediation_status != 'resolved' %}
+      <h3>{{ item.cve_id }} on {{ item.asset_name or item.asset_id }}</h3>
+      <ul>
+        {% for factor in item.priority_explanation %}
+        <li>{{ factor.factor }}: {{ factor.points }} — {{ factor.detail }}</li>
+        {% endfor %}
+      </ul>
+      <p class="note">{{ item.priority_disclaimer }}</p>
+      <ul>
+        {% for evidence in item.evidence %}
+        <li><strong>{{ evidence.source }}</strong> — {{ evidence.detail }}</li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </section>
+
+    <section>
+      <h2>Exposure</h2>
+      <table>
+        <thead><tr><th>Asset</th><th>Region</th><th>Public IP</th><th>Assessment</th></tr></thead>
+        <tbody>
+          {% for row in exposure %}
+          <tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.region }}</td>
+            <td>{{ row.public_ip or "none" }}</td>
+            <td>{{ row.summary }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Coverage and collection errors</h2>
+      <p class="note">A failed collection is not evidence that the asset is free of vulnerabilities. Findings are not auto-resolved unless package collection succeeded.</p>
+      <ul>
+        {% for error in errors %}
+        <li>{{ error.stage }} · {{ error.asset_id or "scan" }} · {{ error.message }}</li>
+        {% else %}
+        <li>No collection errors recorded for this view.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Method</h2>
+      <p>Inventory is read from authorized AWS APIs and optional read-only host commands. Package versions are compared with Debian, RPM, or PEP 440 rules. A vendor or OSV range for the same ecosystem overrides an NVD upstream range, which is how backported fixes are represented. CISA KEV status is applied only from the loaded catalog. No exploit code is retrieved, and no system is patched by this report.</p>
+    </section>
+  </main>
+  <footer>CloudRecon · generated {{ metrics.generated_at }} · * marks illustrative intelligence in the local snapshot.</footer>
+</body>
+</html>

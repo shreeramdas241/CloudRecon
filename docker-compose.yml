@@ -1,0 +1,28 @@
+# Local API and dashboard. They share a SQLite file and do not call AWS.
+# Seed it once with: docker compose run --rm api python -m cloudrecon.cli demo --reset
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      CLOUDRECON_MODE: demo
+      CLOUDRECON_DATABASE_PATH: data/cloudrecon.db
+      CLOUDRECON_ALLOW_LIVE_SCAN: "false"
+      CLOUDRECON_ALLOW_NMAP: "false"
+    volumes:
+      - ./data:/app/data
+      - ./examples/reports:/app/examples/reports
+
+  dashboard:
+    build: .
+    command: streamlit run dashboard/app.py --server.address 0.0.0.0 --server.port 8501
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      CLOUDRECON_MODE: demo
+      CLOUDRECON_DATABASE_PATH: data/cloudrecon.db
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - api

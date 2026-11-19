@@ -1,0 +1,57 @@
+{
+  "snapshot_note": "Curated offline subset for the correlation engine. CVE-9999 identifiers and their version ranges are illustrative. CVE-2021-44228 uses the published fixed version 2.15.0.",
+  "advisories": [
+    {
+      "id": "DEMO-UBUNTU-OPENSSL",
+      "source": "ubuntu",
+      "ecosystem": "Ubuntu:22.04",
+      "package": "libssl3",
+      "aliases": ["openssl"],
+      "cve_ids": ["CVE-9999-0001"],
+      "events": [{"introduced": "0"}, {"fixed": "3.0.2-0ubuntu1.15"}],
+      "summary": "Illustrative OpenSSL backport. The Ubuntu revision, not the upstream version alone, decides the match.",
+      "illustrative": true,
+      "cvss": 7.5,
+      "severity": "HIGH"
+    },
+    {
+      "id": "DEMO-UBUNTU-CURL",
+      "source": "ubuntu",
+      "ecosystem": "Ubuntu:22.04",
+      "package": "curl",
+      "aliases": [],
+      "cve_ids": ["CVE-9999-0002"],
+      "events": [{"introduced": "0"}, {"fixed": "7.81.0-1ubuntu1.16"}],
+      "summary": "Illustrative curl advisory used to show rescan resolution.",
+      "illustrative": true,
+      "cvss": 6.5,
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "DEMO-AMZN-HTTPD",
+      "source": "amazon",
+      "ecosystem": "AmazonLinux:2023",
+      "package": "httpd",
+      "aliases": [],
+      "cve_ids": ["CVE-9999-0003"],
+      "events": [{"introduced": "0"}, {"fixed": "2.4.58-1.amzn2023.0.5"}],
+      "summary": "Illustrative Amazon Linux httpd advisory using RPM epoch-version-release ordering.",
+      "illustrative": true,
+      "cvss": 7.5,
+      "severity": "HIGH"
+    },
+    {
+      "id": "ASF-LOG4J-44228",
+      "source": "asf",
+      "ecosystem": "Maven",
+      "package": "log4j-core",
+      "aliases": ["org.apache.logging.log4j:log4j-core"],
+      "cve_ids": ["CVE-2021-44228"],
+      "events": [{"introduced": "2.0"}, {"fixed": "2.15.0"}],
+      "summary": "Apache Log4j2 JNDI lookup vulnerability. Fixed version in this snapshot is 2.15.0 for CVE-2021-44228. Later related CVEs are out of scope for this row.",
+      "illustrative": false,
+      "cvss": 10.0,
+      "severity": "CRITICAL"
+    }
+  ]
+}

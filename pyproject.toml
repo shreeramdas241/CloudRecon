@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloudrecon"
+version = "0.1.0"
+description = "Authorized AWS EC2 reconnaissance, exposure analysis, and CVE correlation"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi==0.139.2",
+  "uvicorn==0.39.0",
+  "pydantic==2.14.3",
+  "pydantic-settings==2.16.3",
+  "boto3==1.44.6",
+  "httpx==0.28.1",
+  "PyYAML==6.0.3",
+  "packaging==25.0",
+  "streamlit==1.67.0",
+  "jinja2==3.1.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "ruff==0.17.5"]
+
+[project.scripts]
+cloudrecon = "cloudrecon.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cloudrecon*", "api*"]
+
+[tool.setuptools.package-data]
+cloudrecon = ["reporting/templates/*.j2"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["cloudrecon", "api", "dashboard", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"dashboard/app.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

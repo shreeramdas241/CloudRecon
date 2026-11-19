@@ -1,0 +1,18 @@
+# Non-secret defaults. Environment variables prefixed with CLOUDRECON_ override these.
+mode: demo
+intel_offline: true
+allow_live_scan: false
+allow_nmap: false
+enable_inspector: false
+enable_jira: false
+log_level: INFO
+nvd_min_interval_seconds: 6
+http_timeout_seconds: 20
+scheduler_interval_seconds: 86400
+scheduler_backoff_seconds: 30
+advisory_path: examples/intel/vendor_advisories.json
+kev_path: examples/intel/kev_snapshot.json
+nvd_snapshot_path: examples/intel/nvd_snapshot.json
+risk_rules_path: config/risk_rules.yaml
+scope_path: config/scope.example.yaml
+report_dir: examples/reports

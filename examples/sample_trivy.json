@@ -1,0 +1,19 @@
+{
+  "Results": [
+    {
+      "Target": "demo-host (ubuntu 22.04)",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-9999-0002",
+          "PkgName": "curl",
+          "InstalledVersion": "7.81.0-1ubuntu1.14",
+          "FixedVersion": "7.81.0-1ubuntu1.16",
+          "Severity": "MEDIUM",
+          "Status": "fixed",
+          "PrimaryURL": "https://example.invalid/cve-9999-0002",
+          "CVSS": {"nvd": {"V3Score": 6.5}}
+        }
+      ]
+    }
+  ]
+}

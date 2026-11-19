@@ -1,0 +1,21 @@
+{
+  "findings": [
+    {
+      "findingArn": "arn:aws:inspector2:us-east-1:111122223333:finding/demo",
+      "severity": "HIGH",
+      "status": "ACTIVE",
+      "resources": [{"id": "i-0aaa000000000003", "type": "AWS_EC2_INSTANCE"}],
+      "packageVulnerabilityDetails": {
+        "vulnerabilityId": "CVE-9999-0003",
+        "vulnerablePackages": [
+          {
+            "name": "httpd",
+            "version": "2.4.58-1.amzn2023.0.1",
+            "fixedInVersion": "2.4.58-1.amzn2023.0.5",
+            "packageManager": "OS"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "collected_at": "2026-01-15T00:00:00+00:00",
+  "collection_status": "success",
+  "packages_complete": true,
+  "errors": [],
+  "os": {"id": "ubuntu", "version_id": "22.04", "pretty_name": "Ubuntu 22.04", "kernel": "5.15.0-100-generic"},
+  "packages": [
+    {"name": "libssl3", "version": "3.0.2-0ubuntu1.10", "epoch": "0", "arch": "amd64", "manager": "deb"},
+    {"name": "curl", "version": "7.81.0-1ubuntu1.14", "epoch": "0", "arch": "amd64", "manager": "deb"}
+  ],
+  "services": [
+    {"name": "nginx", "port": 443, "protocol": "tcp", "process": "nginx", "pid": 100, "executable": "/usr/sbin/nginx", "address": "0.0.0.0"}
+  ],
+  "processes": [{"pid": 100, "user": "www-data", "command": "nginx: worker", "executable": "/usr/sbin/nginx"}],
+  "docker": [],
+  "docker_status": "not_installed",
+  "processes_truncated": false,
+  "permissions_notes": ["Read-only collection. No privilege escalation was attempted."]
+}

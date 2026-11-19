@@ -1,0 +1,47 @@
+{
+  "snapshot_note": "Simplified offline NVD records. They do not replace the NVD API.",
+  "records": [
+    {
+      "cve_id": "CVE-9999-0001",
+      "description": "Illustrative upstream OpenSSL range used to demonstrate a backport override.",
+      "cvss": 7.5,
+      "severity": "HIGH",
+      "illustrative": true,
+      "cpe_matches": [
+        {
+          "product": "openssl",
+          "version_start_including": "3.0.0",
+          "version_end_excluding": "3.0.8"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-9999-0004",
+      "description": "Illustrative nginx upstream range with no matching vendor advisory in this snapshot.",
+      "cvss": 5.3,
+      "severity": "MEDIUM",
+      "illustrative": true,
+      "cpe_matches": [
+        {
+          "product": "nginx",
+          "version_start_including": "1.14.0",
+          "version_end_excluding": "1.20.0"
+        }
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-44228",
+      "description": "Apache Log4j2 versions 2.0 through 2.14.1 are affected. 2.15.0 is the fixed version recorded for this CVE.",
+      "cvss": 10.0,
+      "severity": "CRITICAL",
+      "illustrative": false,
+      "cpe_matches": [
+        {
+          "product": "log4j-core",
+          "version_start_including": "2.0",
+          "version_end_excluding": "2.15.0"
+        }
+      ]
+    }
+  ]
+}

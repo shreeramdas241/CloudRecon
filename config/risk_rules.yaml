@@ -1,0 +1,25 @@
+version: 1
+score_cap: 100
+cvss_multiplier: 4.0
+potential_match_multiplier: 0.7
+confirmed_match_multiplier: 1.0
+bands:
+  critical: 80
+  high: 55
+  medium: 40
+  low: 0
+factors:
+  kev: 35
+  potential_exposure: 15
+  verified_exposure: 25
+  production_environment: 10
+  criticality_high: 10
+  criticality_medium: 5
+  fix_unavailable: 5
+# A configured floor. The explanation records when it changes the band.
+kev_minimum_band: high
+label: CloudRecon priority
+disclaimer: >-
+  CloudRecon priority is a configurable local ranking for triage. It is not
+  CVSS, not EPSS, and not an industry-standard risk score. It does not mean a
+  vulnerability is exploitable in this environment.

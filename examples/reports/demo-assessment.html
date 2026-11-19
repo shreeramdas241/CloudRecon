@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CloudRecon security assessment</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; color: #1c2430; background: #f4f6f8; }
+    header { background: #102033; color: #fff; padding: 28px 40px; }
+    header h1 { margin: 0 0 6px; font-size: 28px; font-weight: 650; }
+    header p { margin: 0; color: #c5d0dc; }
+    main { padding: 24px 40px 48px; }
+    .banner { background: #fff6e8; border: 1px solid #e2b15a; padding: 12px 14px; margin-bottom: 16px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .card { background: #fff; border: 1px solid #d8dee6; padding: 14px; }
+    .card span { display: block; color: #5c6b7a; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .card strong { font-size: 26px; }
+    section { margin-top: 28px; }
+    h2 { font-size: 18px; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e4e8ee; vertical-align: top; font-size: 13px; }
+    th { background: #e8eef5; }
+    .confirmed { color: #8a2e2e; font-weight: 650; }
+    .potential { color: #8a5a12; font-weight: 650; }
+    .note { color: #5c6b7a; font-size: 13px; }
+    footer { padding: 8px 40px 32px; color: #5c6b7a; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CloudRecon assessment</h1>
+    <p>Authorized, non-destructive inventory and vulnerability correlation. Priority is a local ranking, not CVSS.</p>
+  </header>
+  <main>
+    
+    <div class="banner">
+      Synthetic demonstration data. Instance IDs and account 111122223333 are fictional.
+      CVE-9999-* ranges are illustrative. CVE-2021-44228 uses the published Log4j 2.15.0 fix boundary
+      and is attached to a synthetic asset. Refresh NVD, OSV, vendor advisories, and the full CISA KEV
+      catalog before any operational use. This report does not claim verified internet reachability.
+    </div>
+    
+    <div class="cards">
+      <div class="card"><span>Instances</span><strong>6</strong></div>
+      <div class="card"><span>Fully scanned</span><strong>4</strong></div>
+      <div class="card"><span>Not fully scanned</span><strong>2</strong></div>
+      <div class="card"><span>Open KEV</span><strong>1</strong></div>
+      <div class="card"><span>Potential exposure</span><strong>3</strong></div>
+      <div class="card"><span>Unknown exposure</span><strong>0</strong></div>
+    </div>
+    
+    <p class="note">Scan da220d2b116e46da8a9df873df18a8ba · demo · completed · started 2026-11-19T07:20:26+00:00</p>
+    
+
+    <section>
+      <h2>Findings</h2>
+      <p class="note">Confirmed affected and potentially affected are different match outcomes. A potential match needs vendor or scanner confirmation before it is treated as a vulnerability on that build.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>CVE</th><th>Asset</th><th>Package</th><th>Installed</th><th>Fixed</th>
+            <th>Match</th><th>CVSS</th><th>KEV</th><th>Priority</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>CVE-2021-44228</td>
+            <td>demo-app-1<br><span class="note">us-east-1</span></td>
+            <td>log4j-core</td>
+            <td>2.14.1</td>
+            <td>2.15.0</td>
+            <td class="confirmed">confirmed_affected</td>
+            <td>10.0 CRITICAL</td>
+            <td>yes</td>
+            <td>critical (95.0)</td>
+            <td>open</td>
+          </tr>
+          
+          <tr>
+            <td>CVE-9999-0001 *</td>
+            <td>demo-web-1<br><span class="note">us-east-1</span></td>
+            <td>libssl3</td>
+            <td>3.0.2-0ubuntu1.10</td>
+            <td>3.0.2-0ubuntu1.15</td>
+            <td class="confirmed">confirmed_affected</td>
+            <td>7.5 HIGH</td>
+            <td>no</td>
+            <td>high (65.0)</td>
+            <td>open</td>
+          </tr>
+          
+          <tr>
+            <td>CVE-9999-0002 *</td>
+            <td>demo-web-1<br><span class="note">us-east-1</span></td>
+            <td>curl</td>
+            <td>7.81.0-1ubuntu1.14</td>
+            <td>7.81.0-1ubuntu1.16</td>
+            <td class="confirmed">confirmed_affected</td>
+            <td>6.5 MEDIUM</td>
+            <td>no</td>
+            <td>high (61.0)</td>
+            <td>resolved</td>
+          </tr>
+          
+          <tr>
+            <td>CVE-9999-0003 *</td>
+            <td>demo-dev-1<br><span class="note">us-east-1</span></td>
+            <td>httpd</td>
+            <td>2.4.58-1.amzn2023.0.1</td>
+            <td>2.4.58-1.amzn2023.0.5</td>
+            <td class="confirmed">confirmed_affected</td>
+            <td>7.5 HIGH</td>
+            <td>no</td>
+            <td>medium (45.0)</td>
+            <td>open</td>
+          </tr>
+          
+          <tr>
+            <td>CVE-9999-0002 *</td>
+            <td>demo-partial-1<br><span class="note">eu-west-1</span></td>
+            <td>curl</td>
+            <td>7.81.0-1ubuntu1.14</td>
+            <td>7.81.0-1ubuntu1.16</td>
+            <td class="confirmed">confirmed_affected</td>
+            <td>6.5 MEDIUM</td>
+            <td>no</td>
+            <td>medium (41.0)</td>
+            <td>open</td>
+          </tr>
+          
+          <tr>
+            <td>CVE-9999-0004 *</td>
+            <td>demo-staging-1<br><span class="note">eu-west-1</span></td>
+            <td>nginx</td>
+            <td>1.18.0-1ubuntu1</td>
+            <td>1.20.0</td>
+            <td class="potential">potentially_affected</td>
+            <td>5.3 MEDIUM</td>
+            <td>no</td>
+            <td>low (18.34)</td>
+            <td>open</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Why the priority was assigned</h2>
+      
+      <h3>CVE-2021-44228 on demo-app-1</h3>
+      <ul>
+        
+        <li>cvss: 40.0 — CVSS 10.0 x 4.0</li>
+        
+        <li>kev: 35.0 — Listed in the loaded CISA KEV snapshot. No exploit was retrieved or tested.</li>
+        
+        <li>production_environment: 10.0 — Asset environment tag is production.</li>
+        
+        <li>criticality_high: 10.0 — Asset criticality tag is high.</li>
+        
+        <li>fix_available: 0.0 — A fixed version is recorded: 2.15.0.</li>
+        
+        <li>match_confidence_multiplier: 1.0 — Confirmed match uses the configured confirmed multiplier.</li>
+        
+        <li>kev_minimum_band: 0.0 — Configured rule keeps KEV findings at or above high.</li>
+        
+      </ul>
+      <p class="note">CloudRecon priority is a configurable local ranking for triage. It is not CVSS, not EPSS, and not an industry-standard risk score. It does not mean a vulnerability is exploitable in this environment.</p>
+      <ul>
+        
+        <li><strong>vendor</strong> — ASF-LOG4J-44228 (Maven) Apache Log4j2 JNDI lookup vulnerability. Fixed version in this snapshot is 2.15.0 for CVE-2021-44228. Later related CVEs are out of scope for this row. Installed 2.14.1 is affected for introduced 2.0, fixed 2.15.0.</li>
+        
+        <li><strong>nvd</strong> — NVD lists CVE-2021-44228 against upstream log4j-core 2.14.1. Distro revision and backport status are not decided by this match. Range: &gt;=2.0 &lt;2.15.0.</li>
+        
+        <li><strong>cisa-kev</strong> — CISA KEV lists CVE-2021-44228 (Apache Log4j2 remote code execution) added 2021-12-10, ransomware use Known. CloudRecon does not retrieve exploit code. Snapshot note: Partial public-catalog excerpt, not the full KEV feed.</li>
+        
+      </ul>
+      
+      <h3>CVE-9999-0001 on demo-web-1</h3>
+      <ul>
+        
+        <li>cvss: 30.0 — CVSS 7.5 x 4.0</li>
+        
+        <li>potential_exposure: 15.0 — Potential internet exposure only. Reachability was not verified.</li>
+        
+        <li>production_environment: 10.0 — Asset environment tag is production.</li>
+        
+        <li>criticality_high: 10.0 — Asset criticality tag is high.</li>
+        
+        <li>fix_available: 0.0 — A fixed version is recorded: 3.0.2-0ubuntu1.15.</li>
+        
+        <li>match_confidence_multiplier: 1.0 — Confirmed match uses the configured confirmed multiplier.</li>
+        
+      </ul>
+      <p class="note">CloudRecon priority is a configurable local ranking for triage. It is not CVSS, not EPSS, and not an industry-standard risk score. It does not mean a vulnerability is exploitable in this environment.</p>
+      <ul>
+        
+        <li><strong>vendor</strong> — ILLUSTRATIVE advisory, not a live vendor feed. DEMO-UBUNTU-OPENSSL (Ubuntu:22.04) Illustrative OpenSSL backport. The Ubuntu revision, not the upstream version alone, decides the match. Installed 3.0.2-0ubuntu1.10 is affected for introduced 0, fixed 3.0.2-0ubuntu1.15.</li>
+        
+        <li><strong>nvd</strong> — ILLUSTRATIVE NVD snapshot row. NVD lists CVE-9999-0001 against upstream openssl 3.0.2. Distro revision and backport status are not decided by this match. Range: &gt;=3.0.0 &lt;3.0.8.</li>
+        
+      </ul>
+      
+      <h3>CVE-9999-0003 on demo-dev-1</h3>
+      <ul>
+        
+        <li>cvss: 30.0 — CVSS 7.5 x 4.0</li>
+        
+        <li>potential_exposure: 15.0 — Potential internet exposure only. Reachability was not verified.</li>
+        
+        <li>fix_available: 0.0 — A fixed version is recorded: 2.4.58-1.amzn2023.0.5.</li>
+        
+        <li>match_confidence_multiplier: 1.0 — Confirmed match uses the configured confirmed multiplier.</li>
+        
+      </ul>
+      <p class="note">CloudRecon priority is a configurable local ranking for triage. It is not CVSS, not EPSS, and not an industry-standard risk score. It does not mean a vulnerability is exploitable in this environment.</p>
+      <ul>
+        
+        <li><strong>vendor</strong> — ILLUSTRATIVE advisory, not a live vendor feed. DEMO-AMZN-HTTPD (AmazonLinux:2023) Illustrative Amazon Linux httpd advisory using RPM epoch-version-release ordering. Installed 2.4.58-1.amzn2023.0.1 is affected for introduced 0, fixed 2.4.58-1.amzn2023.0.5.</li>
+        
+      </ul>
+      
+      <h3>CVE-9999-0002 on demo-partial-1</h3>
+      <ul>
+        
+        <li>cvss: 26.0 — CVSS 6.5 x 4.0</li>
+        
+        <li>production_environment: 10.0 — Asset environment tag is production.</li>
+        
+        <li>criticality_medium: 5.0 — Asset criticality tag is medium.</li>
+        
+        <li>fix_available: 0.0 — A fixed version is recorded: 7.81.0-1ubuntu1.16.</li>
+        
+        <li>match_confidence_multiplier: 1.0 — Confirmed match uses the configured confirmed multiplier.</li>
+        
+      </ul>
+      <p class="note">CloudRecon priority is a configurable local ranking for triage. It is not CVSS, not EPSS, and not an industry-standard risk score. It does not mean a vulnerability is exploitable in this environment.</p>
+      <ul>
+        
+        <li><strong>vendor</strong> — ILLUSTRATIVE advisory, not a live vendor feed. DEMO-UBUNTU-CURL (Ubuntu:22.04) Illustrative curl advisory used to show rescan resolution. Installed 7.81.0-1ubuntu1.14 is affected for introduced 0, fixed 7.81.0-1ubuntu1.16.</li>
+        
+      </ul>
+      
+      <h3>CVE-9999-0004 on demo-staging-1</h3>
+      <ul>
+        
+        <li>cvss: 21.2 — CVSS 5.3 x 4.0</li>
+        
+        <li>criticality_medium: 5.0 — Asset criticality tag is medium.</li>
+        
+        <li>fix_available: 0.0 — A fixed version is recorded: 1.20.0.</li>
+        
+        <li>match_confidence_multiplier: 0.7 — Potential match multiplier applied because the version match is not confirmed.</li>
+        
+      </ul>
+      <p class="note">CloudRecon priority is a configurable local ranking for triage. It is not CVSS, not EPSS, and not an industry-standard risk score. It does not mean a vulnerability is exploitable in this environment.</p>
+      <ul>
+        
+        <li><strong>nvd</strong> — ILLUSTRATIVE NVD snapshot row. NVD lists CVE-9999-0004 against upstream nginx 1.18.0. Distro revision and backport status are not decided by this match. Range: &gt;=1.14.0 &lt;1.20.0.</li>
+        
+      </ul>
+      
+    </section>
+
+    <section>
+      <h2>Exposure</h2>
+      <table>
+        <thead><tr><th>Asset</th><th>Region</th><th>Public IP</th><th>Assessment</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td>demo-partial-1</td>
+            <td>eu-west-1</td>
+            <td>none</td>
+            <td>No potential internet path was identified from the collected AWS data.</td>
+          </tr>
+          
+          <tr>
+            <td>demo-staging-1</td>
+            <td>eu-west-1</td>
+            <td>203.0.113.60</td>
+            <td>No potential internet path was identified from the collected AWS data.</td>
+          </tr>
+          
+          <tr>
+            <td>demo-unmanaged-1</td>
+            <td>eu-west-1</td>
+            <td>203.0.113.40</td>
+            <td>Potentially internet exposed. Reachability was not verified.</td>
+          </tr>
+          
+          <tr>
+            <td>demo-app-1</td>
+            <td>us-east-1</td>
+            <td>none</td>
+            <td>No potential internet path was identified from the collected AWS data.</td>
+          </tr>
+          
+          <tr>
+            <td>demo-dev-1</td>
+            <td>us-east-1</td>
+            <td>203.0.113.30</td>
+            <td>Potentially internet exposed. Reachability was not verified.</td>
+          </tr>
+          
+          <tr>
+            <td>demo-web-1</td>
+            <td>us-east-1</td>
+            <td>203.0.113.10</td>
+            <td>Potentially internet exposed. Reachability was not verified.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Coverage and collection errors</h2>
+      <p class="note">A failed collection is not evidence that the asset is free of vulnerabilities. Findings are not auto-resolved unless package collection succeeded.</p>
+      <ul>
+        
+        <li>host · 111122223333/eu-west-1/i-0aaa000000000004 · No host inventory was collected.</li>
+        
+        <li>host · 111122223333/eu-west-1/i-0aaa000000000005 · Host collection did not complete successfully: dpkg-query exited 1: permission denied while reading package status</li>
+        
+        <li>lifecycle · 111122223333/eu-west-1/i-0aaa000000000005 · Resolution skipped because package collection was incomplete or failed.</li>
+        
+      </ul>
+    </section>
+
+    <section>
+      <h2>Method</h2>
+      <p>Inventory is read from authorized AWS APIs and optional read-only host commands. Package versions are compared with Debian, RPM, or PEP 440 rules. A vendor or OSV range for the same ecosystem overrides an NVD upstream range, which is how backported fixes are represented. CISA KEV status is applied only from the loaded catalog. No exploit code is retrieved, and no system is patched by this report.</p>
+    </section>
+  </main>
+  <footer>CloudRecon · generated 2026-11-19T07:20:27+00:00 · * marks illustrative intelligence in the local snapshot.</footer>
+</body>
+</html>

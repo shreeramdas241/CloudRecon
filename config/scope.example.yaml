@@ -1,0 +1,11 @@
+# Live assessments refuse to run until account IDs and regions are explicit.
+# Replace the example account before any live use. Demo mode does not call AWS.
+accounts:
+  - "111122223333"
+regions:
+  - us-east-1
+  - eu-west-1
+instance_tags:
+  CloudRecon: authorized
+allow_nmap: false
+nmap_targets: []
